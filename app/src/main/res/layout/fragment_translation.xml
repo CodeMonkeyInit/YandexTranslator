@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="deniskuliev.yandextranslator.fragments.TranslationFragment">
+
+    <EditText
+        android:id="@+id/original_text"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.13"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:gravity="start"
+        android:hint="@string/input_text"
+        android:inputType="textAutoCorrect|text"
+        android:textAlignment="viewStart"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="deniskuliev.yandextranslator.TranslatorMain"/>
+
+    <TextView
+        android:id="@+id/translated_text"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0.43"
+        android:clickable="false"
+        android:ems="10"
+        android:gravity="start"
+        android:padding="10dp"
+        android:textIsSelectable="true"
+        android:textSize="18sp"/>
+
+</LinearLayout>

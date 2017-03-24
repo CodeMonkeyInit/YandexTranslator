@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Переводчик</string>
+    <string name="title_favorite">Избранное</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_translate">Перевод</string>
+    <string name="input_text">Введите текст</string>
+    <string name="connection_problem">Проблема с соеденением</string>
+</resources>
