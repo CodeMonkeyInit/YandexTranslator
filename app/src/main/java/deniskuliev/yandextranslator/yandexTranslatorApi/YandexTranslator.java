@@ -1,7 +1,5 @@
 package deniskuliev.yandextranslator.yandexTranslatorApi;
 
-import android.os.Debug;
-
 import com.google.common.base.Charsets;
 
 import java.io.Closeable;
@@ -24,6 +22,23 @@ public class YandexTranslator
     private static TranslatorCache _translatorCache;
 
     private URL _apiUrl;
+
+    public YandexTranslator()
+    {
+        if (_translatorCache == null)
+        {
+            _translatorCache = TranslatorCache.getInstance();
+        }
+
+        try
+        {
+            _apiUrl = new URL(API_LINK);
+
+        } catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     private void closeStream(Closeable stream)
     {
@@ -60,8 +75,7 @@ public class YandexTranslator
         } catch (IOException e)
         {
             e.printStackTrace();
-        }
-        finally
+        } finally
         {
             if (scanner != null)
             {
@@ -77,7 +91,7 @@ public class YandexTranslator
         DataOutputStream outputStream = null;
         String urlParameters = String.format("key=%s&lang=%s&text=%s", API_KEY, language, text);
 
-        String response = _translatorCache.getIfPresent(text);
+        String response = _translatorCache.getIfPresent(text, language);
 
         if (response != null)
         {
@@ -100,34 +114,17 @@ public class YandexTranslator
 
             response = getServerResponse(connection);
 
-            _translatorCache.add(text, response);
+            _translatorCache.add(text, response, language);
+
 
         } catch (IOException exception)
         {
             exception.printStackTrace();
-        }
-        finally
+        } finally
         {
             closeStream(outputStream);
         }
 
         return response;
-    }
-
-    public YandexTranslator()
-    {
-        if (_translatorCache == null)
-        {
-            _translatorCache = TranslatorCache.getInstance();
-        }
-
-        try
-        {
-            _apiUrl = new URL(API_LINK);
-
-        } catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
     }
 }

@@ -12,36 +12,87 @@
     android:weightSum="1"
     tools:context="deniskuliev.yandextranslator.fragments.TranslationFragment">
 
-    <EditText
-        android:id="@+id/original_text"
+    <LinearLayout
+        android:id="@+id/language_selection_fragment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="0.13"
-        android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:gravity="start"
-        android:hint="@string/input_text"
-        android:inputType="textAutoCorrect|text"
-        android:textAlignment="viewStart"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context="deniskuliev.yandextranslator.TranslatorMain"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/translated_text"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13">
+
+            <Spinner
+                android:id="@+id/original_text_language"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/swap_translation_languages"
+                style="@style/Widget.AppCompat.ImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:background="?selectableItemBackground"
+                app:srcCompat="@drawable/ic_change_language"/>
+
+            <Spinner
+                android:id="@+id/translated_text_language"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/original_text_fragment"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="10dp"
-        android:layout_weight="0.43"
-        android:clickable="false"
-        android:ems="10"
-        android:gravity="start"
-        android:padding="10dp"
-        android:textIsSelectable="true"
-        android:textSize="18sp"/>
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/original_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.13"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="@string/input_text"
+            android:inputType="textAutoCorrect|text"
+            android:textAlignment="viewStart"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/translated_text_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/translated_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.43"
+            android:clickable="false"
+            android:ems="10"
+            android:gravity="start"
+            android:padding="8dp"
+            android:textIsSelectable="true"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
 
 </LinearLayout>

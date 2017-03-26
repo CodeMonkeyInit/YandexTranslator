@@ -6,4 +6,11 @@
     <string name="title_translate">Перевод</string>
     <string name="input_text">Введите текст</string>
     <string name="connection_problem">Проблема с соеденением</string>
+
+    <string-array name="translation_languages">
+        <item>Английский</item>
+        <item>Русский</item>
+        <item>Французский</item>
+        <item>Немецкий</item>
+    </string-array>
 </resources>
