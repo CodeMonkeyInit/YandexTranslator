@@ -15,7 +15,6 @@ import static junit.framework.Assert.assertEquals;
 @RunWith(RobolectricTestRunner.class)
 public class YandexTranslatorResponseParserUnitTest
 {
-
     @Test
     public void parseResponse_parsedText()
     {

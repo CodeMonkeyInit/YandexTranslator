@@ -1,15 +1,16 @@
 package deniskuliev.yandextranslator.fragments;
 
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import deniskuliev.yandextranslator.R;
-import deniskuliev.yandextranslator.translation.Languages;
+import deniskuliev.yandextranslator.translation.TranslateLanguages;
 import deniskuliev.yandextranslator.yandexTranslatorApi.YandexTranslator;
 import deniskuliev.yandextranslator.yandexTranslatorApi.YandexTranslatorResponseParser;
 
@@ -26,6 +27,36 @@ public class TranslationFragment extends Fragment
 {
     public Spinner _originalLanguage;
     public Spinner _translatedLanguage;
+
+    private volatile TranslateTask translateTask;
+
+    private String getTranslationLanguages()
+    {
+        String originalTextLanguage = TranslateLanguages
+                .getLanguageStringByCode(
+                        _originalLanguage.getSelectedItemPosition());
+
+        String translationTextLanguage = TranslateLanguages
+                .getLanguageStringByCode(
+                        _translatedLanguage.getSelectedItemPosition());
+
+        return String.format("%s-%s", originalTextLanguage, translationTextLanguage);
+    }
+
+    private void translateInBackground()
+    {
+        String translationLanguages = getTranslationLanguages();
+        EditText originalText = (EditText) getView().findViewById(R.id.original_text);
+
+        if (translateTask != null)
+        {
+            translateTask.cancel(true);
+        }
+
+        translateTask = new TranslateTask();
+
+        translateTask.execute(originalText.getText().toString(), translationLanguages);
+    }
 
     private void initializeSpinnersValues()
     {
@@ -38,21 +69,27 @@ public class TranslationFragment extends Fragment
         _originalLanguage.setAdapter(adapter);
         _translatedLanguage.setAdapter(adapter);
         //TODO Load From preferences
-        _translatedLanguage.setSelection(1);
+        _translatedLanguage.setSelection(TranslateLanguages.RUSSIAN_LANGUAGE);
+    }
+
+    private void attachSpinnerHandlers()
+    {
+        _originalLanguage
+                .setOnItemSelectedListener(new OnLanguageSelectedListener(_translatedLanguage));
+        _translatedLanguage
+                .setOnItemSelectedListener(new OnLanguageSelectedListener(_originalLanguage));
     }
 
     private void attachTranslationHandler()
     {
-        EditText textToAttach = (EditText) getView().findViewById(R.id.original_text);
+        EditText originalText = (EditText) getView().findViewById(R.id.original_text);
 
-        textToAttach.setHorizontallyScrolling(false);
-        textToAttach.setMaxLines(Integer.MAX_VALUE);
+        originalText.setHorizontallyScrolling(false);
+        originalText.setMaxLines(Integer.MAX_VALUE);
 
-        textToAttach.addTextChangedListener(
+        originalText.addTextChangedListener(
                 new TextWatcher()
                 {
-                    private volatile TranslateTask currentTask;
-
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
                     {
@@ -61,25 +98,7 @@ public class TranslationFragment extends Fragment
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
                     {
-                        String originalTextLanguage = Languages
-                                .getLanguageStringByCode(
-                                        _originalLanguage.getSelectedItemPosition());
-                        String translationTextLanguage = Languages
-                                .getLanguageStringByCode(
-                                        _translatedLanguage.getSelectedItemPosition());
-
-                        String translationLanguages = String
-                                .format("%s-%s", originalTextLanguage, translationTextLanguage);
-
-
-                        if (currentTask != null)
-                        {
-                            currentTask.cancel(true);
-                        }
-
-                        currentTask = new TranslateTask();
-
-                        currentTask.execute(charSequence.toString(), translationLanguages);
+                        translateInBackground();
                     }
 
                     @Override
@@ -96,7 +115,6 @@ public class TranslationFragment extends Fragment
 
         _originalLanguage.setSelection(_translatedLanguage.getSelectedItemPosition());
         _translatedLanguage.setSelection(tempLanguageCode);
-
     }
 
     @Override
@@ -121,6 +139,7 @@ public class TranslationFragment extends Fragment
         _translatedLanguage = (Spinner) currentView.findViewById(R.id.translated_text_language);
 
         initializeSpinnersValues();
+        attachSpinnerHandlers();
     }
 
     @Nullable
@@ -128,6 +147,38 @@ public class TranslationFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         return inflater.inflate(R.layout.fragment_translation, container, false);
+    }
+
+    private class OnLanguageSelectedListener implements AdapterView.OnItemSelectedListener
+    {
+        private int previousSelectedLanguage;
+        private Spinner _oppositeSpinner;
+
+        public OnLanguageSelectedListener(Spinner oppositeSpinner)
+        {
+            _oppositeSpinner = oppositeSpinner;
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+        {
+            int spinnerToWatchSelectedLanguage = _oppositeSpinner.getSelectedItemPosition();
+
+            if (position != previousSelectedLanguage)
+            {
+                if (position == spinnerToWatchSelectedLanguage)
+                {
+                    _oppositeSpinner.setSelection(previousSelectedLanguage);
+                }
+                previousSelectedLanguage = position;
+                translateInBackground();
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent)
+        {
+        }
     }
 
     private class TranslateTask extends AsyncTask<String, Void, String>

@@ -1,23 +1,24 @@
 package deniskuliev.yandextranslator;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import deniskuliev.yandextranslator.fragments.HistoryFragment;
 import deniskuliev.yandextranslator.fragments.TranslationFragment;
+import deniskuliev.yandextranslator.fragments.history.HistoryTabbedFragment;
 
 public class TranslatorMain extends AppCompatActivity
 {
     private FragmentManager _fragmentManager;
 
     private TranslationFragment _translationFragment;
-    private HistoryFragment _historyFragment;
+    private HistoryTabbedFragment _historyFragment;
 
     private Fragment _selectedFragment;
     private BottomNavigationView.OnNavigationItemSelectedListener OnNavigationItemSelectedListener
@@ -50,7 +51,6 @@ public class TranslatorMain extends AppCompatActivity
         }
     };
 
-
     private void addFragmentToContainer(Fragment fragment)
     {
         FragmentTransaction fragmentTransaction = _fragmentManager.beginTransaction();
@@ -78,10 +78,10 @@ public class TranslatorMain extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        _fragmentManager = getFragmentManager();
+        _fragmentManager = getSupportFragmentManager();
 
         _translationFragment = new TranslationFragment();
-        _historyFragment = new HistoryFragment();
+        _historyFragment = new HistoryTabbedFragment();
 
         addFragmentToContainer(_translationFragment);
 
