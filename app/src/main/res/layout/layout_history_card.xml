@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/history_original_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingEnd="25dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="25dp"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:text="Test"/>
+
+        <TextView
+            android:id="@+id/history_translated_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="15dp"
+            android:paddingEnd="25dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="25dp"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:textSize="16sp"
+            tools:text="ТестТестТестТестТстТтТестТестТестТестТест"/>
+
+        <ImageButton
+            android:id="@+id/history_favorite_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="?selectableItemBackground"
+            cardview:srcCompat="@drawable/ic_favorites_history"/>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

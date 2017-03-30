@@ -10,15 +10,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import deniskuliev.yandextranslator.fragments.HistoryTabsFragment;
 import deniskuliev.yandextranslator.fragments.TranslationFragment;
-import deniskuliev.yandextranslator.fragments.history.HistoryTabbedFragment;
 
 public class TranslatorMain extends AppCompatActivity
 {
     private FragmentManager _fragmentManager;
 
     private TranslationFragment _translationFragment;
-    private HistoryTabbedFragment _historyFragment;
+    private HistoryTabsFragment _historyFragment;
 
     private Fragment _selectedFragment;
     private BottomNavigationView.OnNavigationItemSelectedListener OnNavigationItemSelectedListener
@@ -81,13 +81,13 @@ public class TranslatorMain extends AppCompatActivity
         _fragmentManager = getSupportFragmentManager();
 
         _translationFragment = new TranslationFragment();
-        _historyFragment = new HistoryTabbedFragment();
+        _historyFragment = new HistoryTabsFragment();
+
 
         addFragmentToContainer(_translationFragment);
+//        _translationFragment.setHistoryAdapter(_historyFragment.getHistoryAdapter());
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(OnNavigationItemSelectedListener);
     }
 }
-
-

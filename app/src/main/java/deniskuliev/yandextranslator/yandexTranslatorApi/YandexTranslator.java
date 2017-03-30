@@ -116,7 +116,6 @@ public class YandexTranslator
 
             _translatorCache.add(text, response, language);
 
-
         } catch (IOException exception)
         {
             exception.printStackTrace();

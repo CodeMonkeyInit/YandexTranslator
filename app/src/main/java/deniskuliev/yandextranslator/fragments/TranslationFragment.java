@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import deniskuliev.yandextranslator.R;
+import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
 import deniskuliev.yandextranslator.translation.TranslateLanguages;
 import deniskuliev.yandextranslator.yandexTranslatorApi.YandexTranslator;
 import deniskuliev.yandextranslator.yandexTranslatorApi.YandexTranslatorResponseParser;
@@ -27,7 +28,7 @@ public class TranslationFragment extends Fragment
 {
     public Spinner _originalLanguage;
     public Spinner _translatedLanguage;
-
+    private TranslatedTextRecyclerViewAdapter _historyAdapter;
     private volatile TranslateTask translateTask;
 
     private String getTranslationLanguages()
@@ -82,7 +83,8 @@ public class TranslationFragment extends Fragment
 
     private void attachTranslationHandler()
     {
-        EditText originalText = (EditText) getView().findViewById(R.id.original_text);
+        final EditText originalText = (EditText) getView().findViewById(R.id.original_text);
+        final TextView translatedText = (TextView) getView().findViewById(R.id.translated_text);
 
         originalText.setHorizontallyScrolling(false);
         originalText.setMaxLines(Integer.MAX_VALUE);
@@ -107,6 +109,31 @@ public class TranslationFragment extends Fragment
                     }
                 }
         );
+
+//        originalText.setOnKeyListener(new View.OnKeyListener()
+//        {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event)
+//            {
+//                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER))
+//                {
+//                    try
+//                    {
+//                        translateTask.wait();
+//
+//                        _adapter.add(
+//                                new TranslatedText(originalText.getText().toString(),
+//                                                   translatedText.getText().toString(),
+//                                                   getTranslationLanguages()));
+//                    } catch (InterruptedException e)
+//                    {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                return false;
+//            }
+//        });
     }
 
     private void swapLanguages()
@@ -147,6 +174,11 @@ public class TranslationFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         return inflater.inflate(R.layout.fragment_translation, container, false);
+    }
+
+    public void setHistoryAdapter(TranslatedTextRecyclerViewAdapter historyAdapter)
+    {
+        _historyAdapter = historyAdapter;
     }
 
     private class OnLanguageSelectedListener implements AdapterView.OnItemSelectedListener

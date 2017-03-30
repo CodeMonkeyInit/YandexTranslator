@@ -1,4 +1,4 @@
-package deniskuliev.yandextranslator.fragments.history;
+package deniskuliev.yandextranslator.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,23 +8,36 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import deniskuliev.yandextranslator.R;
+import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
+import deniskuliev.yandextranslator.fragments.historyAndFavorites.favorites.FavoritesFragment;
+import deniskuliev.yandextranslator.fragments.historyAndFavorites.history.HistoryFragment;
 
-public class HistoryTabbedFragment extends Fragment
+public class HistoryTabsFragment extends Fragment
 {
-
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
+
+    private HistoryFragment _historyFragment;
+    private FavoritesFragment _favoritesFragment;
+
+    private void initializeFragments()
+    {
+        _historyFragment = new HistoryFragment();
+        _favoritesFragment = new FavoritesFragment();
+
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
+        initializeFragments();
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -39,18 +52,6 @@ public class HistoryTabbedFragment extends Fragment
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -58,10 +59,11 @@ public class HistoryTabbedFragment extends Fragment
         return inflater.inflate(R.layout.fragment_history_tabs, container, false);
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+    public TranslatedTextRecyclerViewAdapter getHistoryAdapter()
+    {
+        return _historyFragment.getAdapter();
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter
     {
         public SectionsPagerAdapter(FragmentManager fm)
@@ -72,15 +74,21 @@ public class HistoryTabbedFragment extends Fragment
         @Override
         public Fragment getItem(int position)
         {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return new HistoryFragment();
+            switch (position)
+            {
+                case 0:
+                    return _historyFragment;
+
+                case 1:
+                    return _favoritesFragment;
+            }
+            return null;
         }
 
         @Override
         public int getCount()
         {
-            // Show 3 total pages.
+            // Show 2 total pages.
             return 2;
         }
 
