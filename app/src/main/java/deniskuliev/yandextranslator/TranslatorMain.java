@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import deniskuliev.yandextranslator.fragments.HistoryTabsFragment;
-import deniskuliev.yandextranslator.fragments.TranslationFragment;
+import deniskuliev.yandextranslator.fragments.translation.TranslationFragment;
 
 public class TranslatorMain extends AppCompatActivity
 {
@@ -60,12 +60,7 @@ public class TranslatorMain extends AppCompatActivity
             return;
         }
 
-        if (_selectedFragment != null)
-        {
-            fragmentTransaction.remove(_selectedFragment);
-        }
-
-        fragmentTransaction.add(R.id.translator_container, fragment);
+        fragmentTransaction.replace(R.id.translator_container, fragment);
 
         fragmentTransaction.commit();
 
@@ -85,7 +80,6 @@ public class TranslatorMain extends AppCompatActivity
 
 
         addFragmentToContainer(_translationFragment);
-//        _translationFragment.setHistoryAdapter(_historyFragment.getHistoryAdapter());
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(OnNavigationItemSelectedListener);

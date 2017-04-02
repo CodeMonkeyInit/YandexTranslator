@@ -12,6 +12,14 @@ public abstract class TranslationList
 {
     protected TranslatedTextRecyclerViewAdapter _adapter;
     protected List<TranslatedText> translatedTexts;
+    protected List<TranslatedText> reversedTranslatedTexts;
+
+    public TranslationList()
+    {
+        initializeLists();
+    }
+
+    protected abstract void initializeLists();
 
     public int size()
     {
@@ -30,7 +38,7 @@ public abstract class TranslationList
 
     public void set(int position, TranslatedText translatedText)
     {
-        translatedTexts.set(position, translatedText);
+        reversedTranslatedTexts.set(position, translatedText);
 
         if (_adapter != null)
         {
@@ -40,23 +48,22 @@ public abstract class TranslationList
 
     public boolean contains(TranslatedText translatedText)
     {
-        return translatedTexts.contains(translatedText);
+        return reversedTranslatedTexts.contains(translatedText);
     }
 
     public int indexOf(TranslatedText translatedText)
     {
-        return translatedTexts.indexOf(translatedText);
+        return reversedTranslatedTexts.indexOf(translatedText);
     }
-
 
     public TranslatedText get(int position)
     {
-        return translatedTexts.get(position);
+        return reversedTranslatedTexts.get(position);
     }
 
     public void remove(int position)
     {
-        translatedTexts.remove(position);
+        reversedTranslatedTexts.remove(position);
 
         if (_adapter != null)
         {

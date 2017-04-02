@@ -20,7 +20,6 @@ public abstract class HistoryAbstractFragment extends Fragment
     protected RecyclerView _recyclerView;
     protected AbstractHistoryTouchHelperCallback _touchHelperCallback;
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {

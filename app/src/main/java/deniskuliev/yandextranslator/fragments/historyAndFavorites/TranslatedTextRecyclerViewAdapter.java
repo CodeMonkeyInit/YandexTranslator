@@ -14,6 +14,13 @@ public abstract class TranslatedTextRecyclerViewAdapter extends
 {
     protected TranslationList translatedTexts;
 
+    public TranslatedTextRecyclerViewAdapter()
+    {
+        initializeTranslatedTexts();
+    }
+
+    public abstract void initializeTranslatedTexts();
+
     public void add(TranslatedText translatedText)
     {
         translatedTexts.add(translatedText);
@@ -23,7 +30,6 @@ public abstract class TranslatedTextRecyclerViewAdapter extends
     {
         translatedTexts.remove(position);
     }
-
 
     @Override
     public void onBindViewHolder(AbstractHistoryRecyclerViewViewHolder holder, int position)

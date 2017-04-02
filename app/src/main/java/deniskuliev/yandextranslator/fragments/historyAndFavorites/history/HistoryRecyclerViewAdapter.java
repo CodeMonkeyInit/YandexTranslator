@@ -17,10 +17,15 @@ class HistoryRecyclerViewAdapter extends TranslatedTextRecyclerViewAdapter
 {
     public HistoryRecyclerViewAdapter()
     {
-        translatedTexts = TranslationHistory.getInstance();
-        translatedTexts.attachAdapter(this);
+        super();
+    }
 
+    @Override
+    public void initializeTranslatedTexts()
+    {
+        translatedTexts = TranslationHistory.getInstance();
         notifyItemRangeInserted(getItemCount(), translatedTexts.size());
+        translatedTexts.attachAdapter(this);
     }
 
     @Override

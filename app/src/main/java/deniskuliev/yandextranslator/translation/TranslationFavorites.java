@@ -1,5 +1,7 @@
 package deniskuliev.yandextranslator.translation;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,7 @@ public class TranslationFavorites extends TranslationList
 
     private TranslationFavorites()
     {
-        translatedTexts = new ArrayList<>();
+        super();
     }
 
     public static TranslationFavorites getInstance()
@@ -23,6 +25,13 @@ public class TranslationFavorites extends TranslationList
         }
 
         return instance;
+    }
+
+    @Override
+    protected void initializeLists()
+    {
+        translatedTexts = new ArrayList<>();
+        reversedTranslatedTexts = Lists.reverse(translatedTexts);
     }
 
     @Override

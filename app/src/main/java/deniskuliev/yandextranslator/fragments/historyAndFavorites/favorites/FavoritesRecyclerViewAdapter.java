@@ -17,9 +17,14 @@ class FavoritesRecyclerViewAdapter extends TranslatedTextRecyclerViewAdapter
 {
     public FavoritesRecyclerViewAdapter()
     {
+        super();
+    }
+
+    @Override
+    public void initializeTranslatedTexts()
+    {
         translatedTexts = TranslationFavorites.getInstance();
         translatedTexts.attachAdapter(this);
-
         notifyItemRangeInserted(getItemCount(), translatedTexts.size());
     }
 

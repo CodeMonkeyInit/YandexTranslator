@@ -18,9 +18,9 @@ import deniskuliev.yandextranslator.fragments.historyAndFavorites.history.Histor
 
 public class HistoryTabsFragment extends Fragment
 {
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private SectionsPagerAdapter _sectionsPagerAdapter;
 
-    private ViewPager mViewPager;
+    private ViewPager _viewPager;
 
     private HistoryFragment _historyFragment;
     private FavoritesFragment _favoritesFragment;
@@ -39,16 +39,13 @@ public class HistoryTabsFragment extends Fragment
 
         initializeFragments();
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+        _sectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) getView().findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        _viewPager = (ViewPager) getView().findViewById(R.id.container);
+        _viewPager.setAdapter(_sectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) getView().findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setupWithViewPager(_viewPager);
 
     }
 

@@ -1,5 +1,7 @@
 package deniskuliev.yandextranslator.translation;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.FakeHistory;
@@ -14,10 +16,7 @@ public class TranslationHistory extends TranslationList
 
     private TranslationHistory()
     {
-        translatedTexts = new ArrayList<>();
-
-        //TODO remove after test
-        translatedTexts = FakeHistory.getFakeHistory();
+        super();
     }
 
     public static TranslationHistory getInstance()
@@ -28,6 +27,16 @@ public class TranslationHistory extends TranslationList
         }
 
         return instance;
+    }
+
+    @Override
+    protected void initializeLists()
+    {
+        translatedTexts = new ArrayList<>();
+
+        //TODO remove after test
+        translatedTexts = FakeHistory.getFakeHistory();
+        reversedTranslatedTexts = Lists.reverse(translatedTexts);
     }
 }
 

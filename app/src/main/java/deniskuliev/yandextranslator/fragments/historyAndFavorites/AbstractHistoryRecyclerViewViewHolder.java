@@ -34,8 +34,8 @@ public abstract class AbstractHistoryRecyclerViewViewHolder extends RecyclerView
 
     public void bind(TranslatedText translatedText)
     {
-        _originalText.setText(translatedText.originalText);
-        _translatedText.setText(translatedText.translatedText);
+        _originalText.setText(translatedText.original);
+        _translatedText.setText(translatedText.translated);
 
         if (translatedText.isFavorite)
         {

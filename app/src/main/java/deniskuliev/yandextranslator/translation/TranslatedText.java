@@ -7,9 +7,9 @@ package deniskuliev.yandextranslator.translation;
 public class TranslatedText
 {
     private static int textsTranslated;
-    public String originalText;
-    public String translatedText;
-    public String translatedLanguages;
+    public String original;
+    public String translated;
+    public String translationLanguages;
     public boolean isFavorite;
     private int id;
 
@@ -17,9 +17,9 @@ public class TranslatedText
     {
         textsTranslated++;
         id = textsTranslated;
-        this.originalText = originalText;
-        this.translatedText = translatedText;
-        this.translatedLanguages = tranlatedLanguages;
+        this.original = originalText;
+        this.translated = translatedText;
+        this.translationLanguages = tranlatedLanguages;
     }
 
     public TranslatedText()
@@ -40,5 +40,13 @@ public class TranslatedText
             }
         }
         return false;
+    }
+
+    public boolean fieldsEqual(TranslatedText translatedText)
+    {
+        return (translatedText != null) && original.equals(translatedText.original)
+                && translated.equals(translatedText.translated)
+                && translationLanguages.equals(translatedText.translationLanguages);
+
     }
 }
