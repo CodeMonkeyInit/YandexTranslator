@@ -26,10 +26,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class YandexTranslatorUITest
 {
     @Rule
-    public ActivityTestRule<TranslatorMain> activityTestRule = new ActivityTestRule<>(
-            TranslatorMain.class, false, true);
+    public ActivityTestRule<TranslatorAppMainActivity> activityTestRule = new ActivityTestRule<>(
+            TranslatorAppMainActivity.class, false, true);
 
-    public TranslatorMain activity;
+    public TranslatorAppMainActivity activity;
 
     @Before
     public void setActivity()

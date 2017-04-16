@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import deniskuliev.yandextranslator.R;
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.AbstractHistoryRecyclerViewViewHolder;
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
-import deniskuliev.yandextranslator.translation.TranslationFavorites;
+import deniskuliev.yandextranslator.translationModel.TranslationFavorites;
 
 /**
  * Created by deniskuliev on 30.03.17.
@@ -26,6 +26,7 @@ class FavoritesRecyclerViewAdapter extends TranslatedTextRecyclerViewAdapter
         translatedTexts = TranslationFavorites.getInstance();
         translatedTexts.attachAdapter(this);
         notifyItemRangeInserted(getItemCount(), translatedTexts.size());
+
     }
 
     @Override

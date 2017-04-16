@@ -4,9 +4,9 @@ import android.view.View;
 
 import deniskuliev.yandextranslator.R;
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.AbstractHistoryRecyclerViewViewHolder;
-import deniskuliev.yandextranslator.translation.TranslatedText;
-import deniskuliev.yandextranslator.translation.TranslationFavorites;
-import deniskuliev.yandextranslator.translation.TranslationHistory;
+import deniskuliev.yandextranslator.translationModel.TranslatedText;
+import deniskuliev.yandextranslator.translationModel.TranslationFavorites;
+import deniskuliev.yandextranslator.translationModel.TranslationHistory;
 
 /**
  * Created by deniskuliev on 30.03.17.
@@ -34,17 +34,20 @@ class HistoryRecyclerViewViewHolder extends AbstractHistoryRecyclerViewViewHolde
 
                 if (translatedText.isFavorite)
                 {
-                    int favoritePostion = translationFavorites.indexOf(translatedText);
+                    int favoritePosition = translationFavorites.indexOf(translatedText);
 
-                    translationFavorites.remove(favoritePostion);
+                    translationFavorites.remove(favoritePosition);
                     translatedText.isFavorite = false;
+
                     _favoriteButton.setImageResource(R.drawable.ic_favorites_history);
                 }
                 else
                 {
-                    translationFavorites.add(translatedText);
                     translatedText.isFavorite = true;
+
                     _favoriteButton.setImageResource(R.drawable.ic_favorites_history_activated);
+
+                    translationFavorites.add(translatedText);
                 }
 
                 translationHistory.set(position, translatedText);

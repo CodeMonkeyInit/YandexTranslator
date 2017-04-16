@@ -1,5 +1,6 @@
-package deniskuliev.yandextranslator.translation;
+package deniskuliev.yandextranslator.translationModel;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
@@ -11,15 +12,31 @@ import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedText
 public abstract class TranslationList
 {
     protected TranslatedTextRecyclerViewAdapter _adapter;
+
     protected List<TranslatedText> translatedTexts;
     protected List<TranslatedText> reversedTranslatedTexts;
 
+    protected HistoryDAO historyDAO;
+
     public TranslationList()
     {
-        initializeLists();
+        initializeDataAccessObject();
+        initializeCollections();
     }
 
-    protected abstract void initializeLists();
+    protected abstract void initializeCollections();
+
+    protected void initializeDataAccessObject()
+    {
+        try
+        {
+            historyDAO = DatabaseHelperFactory.getDatabaseHelper().getHistoryDAO();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     public int size()
     {
@@ -74,5 +91,10 @@ public abstract class TranslationList
     public void attachAdapter(TranslatedTextRecyclerViewAdapter adapter)
     {
         _adapter = adapter;
+    }
+
+    public void detachAdapter()
+    {
+        _adapter = null;
     }
 }

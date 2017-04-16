@@ -3,7 +3,7 @@ package deniskuliev.yandextranslator.fragments.historyAndFavorites;
 import java.util.ArrayList;
 import java.util.List;
 
-import deniskuliev.yandextranslator.translation.TranslatedText;
+import deniskuliev.yandextranslator.translationModel.TranslatedText;
 
 /**
  * Created by deniskuliev on 28.03.17.

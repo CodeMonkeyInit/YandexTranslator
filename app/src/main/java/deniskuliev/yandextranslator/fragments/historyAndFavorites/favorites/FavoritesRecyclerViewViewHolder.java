@@ -3,7 +3,7 @@ package deniskuliev.yandextranslator.fragments.historyAndFavorites.favorites;
 import android.view.View;
 
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.AbstractHistoryRecyclerViewViewHolder;
-import deniskuliev.yandextranslator.translation.TranslationFavorites;
+import deniskuliev.yandextranslator.translationModel.TranslationFavorites;
 
 /**
  * Created by deniskuliev on 30.03.17.

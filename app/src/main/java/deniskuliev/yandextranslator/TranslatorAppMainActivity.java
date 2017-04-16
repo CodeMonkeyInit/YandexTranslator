@@ -10,15 +10,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import deniskuliev.yandextranslator.fragments.HistoryTabsFragment;
+import deniskuliev.yandextranslator.fragments.historyAndFavorites.HistoryTabsFragment;
+import deniskuliev.yandextranslator.fragments.settings.SettingsFragment;
 import deniskuliev.yandextranslator.fragments.translation.TranslationFragment;
+import deniskuliev.yandextranslator.translationModel.DatabaseHelperFactory;
 
-public class TranslatorMain extends AppCompatActivity
+public class TranslatorAppMainActivity extends AppCompatActivity
 {
     private FragmentManager _fragmentManager;
 
     private TranslationFragment _translationFragment;
     private HistoryTabsFragment _historyFragment;
+    private SettingsFragment _settingsFragment;
 
     private Fragment _selectedFragment;
     private BottomNavigationView.OnNavigationItemSelectedListener OnNavigationItemSelectedListener
@@ -45,6 +48,12 @@ public class TranslatorMain extends AppCompatActivity
                     }
                     return true;
                 case R.id.navigation_settings:
+
+                    if (_selectedFragment != _settingsFragment)
+                    {
+                        addFragmentToContainer(_settingsFragment);
+                    }
+
                     return true;
             }
             return false;
@@ -60,6 +69,8 @@ public class TranslatorMain extends AppCompatActivity
             return;
         }
 
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
         fragmentTransaction.replace(R.id.translator_container, fragment);
 
         fragmentTransaction.commit();
@@ -71,15 +82,17 @@ public class TranslatorMain extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_translation_app_main);
 
         _fragmentManager = getSupportFragmentManager();
 
         _translationFragment = new TranslationFragment();
         _historyFragment = new HistoryTabsFragment();
-
+        _settingsFragment = new SettingsFragment();
 
         addFragmentToContainer(_translationFragment);
+
+        DatabaseHelperFactory.setDatabaseHelper(getApplicationContext());
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(OnNavigationItemSelectedListener);

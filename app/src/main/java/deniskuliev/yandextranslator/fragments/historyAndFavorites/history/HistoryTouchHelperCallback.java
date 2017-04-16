@@ -13,7 +13,7 @@ class HistoryTouchHelperCallback extends AbstractHistoryTouchHelperCallback
 {
     public HistoryTouchHelperCallback(TranslatedTextRecyclerViewAdapter adapter)
     {
-        super(DRAG_DIRECTIONS, ItemTouchHelper.RIGHT);
+        super(DRAG_DIRECTIONS, ItemTouchHelper.LEFT);
 
         _adapter = adapter;
     }

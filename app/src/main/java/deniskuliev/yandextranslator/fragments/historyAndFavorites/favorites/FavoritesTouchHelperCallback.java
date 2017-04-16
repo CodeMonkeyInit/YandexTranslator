@@ -11,7 +11,7 @@ import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedText
 
 class FavoritesTouchHelperCallback extends AbstractHistoryTouchHelperCallback
 {
-    private static final int SWIPE_DIRECTIONS = ItemTouchHelper.LEFT;
+    private static final int SWIPE_DIRECTIONS = ItemTouchHelper.RIGHT;
 
     public FavoritesTouchHelperCallback(TranslatedTextRecyclerViewAdapter adapter)
     {

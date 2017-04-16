@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import deniskuliev.yandextranslator.R;
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.AbstractHistoryRecyclerViewViewHolder;
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
-import deniskuliev.yandextranslator.translation.TranslationHistory;
+import deniskuliev.yandextranslator.translationModel.TranslationHistory;
 
 /**
  * Created by deniskuliev on 29.03.17.

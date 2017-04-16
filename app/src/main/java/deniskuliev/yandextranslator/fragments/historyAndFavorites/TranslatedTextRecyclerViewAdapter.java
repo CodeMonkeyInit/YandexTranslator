@@ -2,8 +2,8 @@ package deniskuliev.yandextranslator.fragments.historyAndFavorites;
 
 import android.support.v7.widget.RecyclerView;
 
-import deniskuliev.yandextranslator.translation.TranslatedText;
-import deniskuliev.yandextranslator.translation.TranslationList;
+import deniskuliev.yandextranslator.translationModel.TranslatedText;
+import deniskuliev.yandextranslator.translationModel.TranslationList;
 
 /**
  * Created by deniskuliev on 30.03.17.

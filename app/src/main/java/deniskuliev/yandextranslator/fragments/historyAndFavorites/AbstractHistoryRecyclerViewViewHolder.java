@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import deniskuliev.yandextranslator.R;
-import deniskuliev.yandextranslator.translation.TranslatedText;
+import deniskuliev.yandextranslator.translationModel.TranslatedText;
 
 /**
  * Created by deniskuliev on 29.03.17.
