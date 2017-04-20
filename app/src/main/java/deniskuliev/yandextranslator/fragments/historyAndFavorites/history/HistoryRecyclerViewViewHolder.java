@@ -8,13 +8,9 @@ import deniskuliev.yandextranslator.translationModel.TranslatedText;
 import deniskuliev.yandextranslator.translationModel.TranslationFavorites;
 import deniskuliev.yandextranslator.translationModel.TranslationHistory;
 
-/**
- * Created by deniskuliev on 30.03.17.
- */
-
 class HistoryRecyclerViewViewHolder extends AbstractHistoryRecyclerViewViewHolder
 {
-    public HistoryRecyclerViewViewHolder(View itemView)
+    HistoryRecyclerViewViewHolder(View itemView)
     {
         super(itemView);
     }

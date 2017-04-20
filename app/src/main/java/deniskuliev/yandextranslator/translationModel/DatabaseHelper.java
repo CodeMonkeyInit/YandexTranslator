@@ -10,10 +10,7 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
-/**
- * Created by deniskuliev on 06.04.17.
- */
-
+@SuppressWarnings("WeakerAccess")
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper
 {
     private static final String TAG = DatabaseHelper.class.getSimpleName();
@@ -26,9 +23,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
     public DatabaseHelper(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
-        //TODO delete after debug
-        //context.deleteDatabase(DATABASE_NAME);
     }
 
     @Override
@@ -40,7 +34,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch (SQLException e)
         {
-            Log.e(TAG, "Error while creating Database" + DATABASE_NAME);
+            Log.e(TAG, "Error while creating Database " + DATABASE_NAME);
             e.printStackTrace();
         }
     }
@@ -56,7 +50,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch (SQLException e)
         {
-            Log.e(TAG, "Error while upgrading Database" + DATABASE_NAME);
+            Log.e(TAG, "Error while upgrading Database " + DATABASE_NAME);
             e.printStackTrace();
         }
     }

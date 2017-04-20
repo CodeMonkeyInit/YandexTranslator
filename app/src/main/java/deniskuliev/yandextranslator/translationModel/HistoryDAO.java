@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by deniskuliev on 06.04.17.
- */
+@SuppressWarnings("WeakerAccess")
 public class HistoryDAO extends BaseDaoImpl<TranslatedText, Integer>
 {
     HistoryDAO(ConnectionSource connectionSource, Class<TranslatedText> dataClass) throws
@@ -20,19 +18,17 @@ public class HistoryDAO extends BaseDaoImpl<TranslatedText, Integer>
 
     public List<TranslatedText> getTranslationHistory() throws SQLException
     {
-        List<TranslatedText> translatedTexts = queryBuilder().where().eq("isInHistory", true)
-                .query();
 
-        return translatedTexts;
+        return queryBuilder().where().eq("isInHistory", true).query();
     }
 
     public List<TranslatedText> getFavorites() throws SQLException
     {
-        List<TranslatedText> favoriteTexts = queryBuilder().where().eq("isFavorite", true).query();
 
-        return favoriteTexts;
+        return queryBuilder().where().eq("isFavorite", true).query();
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean remove(TranslatedText translatedText) throws SQLException
     {
         if (!translatedText.isInHistory && !translatedText.isFavorite)

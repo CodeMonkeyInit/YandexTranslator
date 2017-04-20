@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <Spinner
-                android:id="@+id/original_text_language"
+                android:id="@+id/original_text_language_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -29,16 +29,17 @@
                 />
 
             <ImageButton
-                android:id="@+id/swap_translation_languages"
+                android:id="@+id/swap_translation_languages_button"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/change_language_button_description"
                 app:srcCompat="@drawable/ic_change_language"/>
 
             <Spinner
-                android:id="@+id/translated_text_language"
+                android:id="@+id/translated_text_language_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -57,7 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            tools:ignore="NestedWeights">
 
             <EditText
                 android:id="@+id/original_text"
@@ -82,6 +84,7 @@
                 android:layout_alignEnd="@id/original_text"
                 android:layout_alignRight="@id/original_text"
                 android:background="@null"
+                android:contentDescription="@string/remove_text_from_text_field_button_description"
                 android:padding="5dp"
                 android:src="@drawable/remove_text_button_selector"/>
 
@@ -113,6 +116,7 @@
                 android:layout_alignEnd="@id/translated_text"
                 android:layout_alignRight="@id/translated_text"
                 android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/add_to_favorites_button_description"
                 android:padding="5dp"
                 android:src="@drawable/ic_favorites_history"/>
         </RelativeLayout>
@@ -122,14 +126,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3">wdt
+        android:layout_weight="3">
 
         <TextView
-            android:id="@+id/translated_with_yanex_text"
+            android:id="@+id/translated_with_yandex_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Переведено сервисом «Яндекс.Переводчик»"
+            android:text="@string/translated_with_yandex_translator_text"
             android:textColor="@android:color/black"
             android:textSize="18sp"/>
 

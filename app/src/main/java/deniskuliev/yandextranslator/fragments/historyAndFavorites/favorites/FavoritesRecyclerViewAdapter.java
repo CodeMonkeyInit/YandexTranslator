@@ -9,13 +9,10 @@ import deniskuliev.yandextranslator.fragments.historyAndFavorites.AbstractHistor
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
 import deniskuliev.yandextranslator.translationModel.TranslationFavorites;
 
-/**
- * Created by deniskuliev on 30.03.17.
- */
 
 class FavoritesRecyclerViewAdapter extends TranslatedTextRecyclerViewAdapter
 {
-    public FavoritesRecyclerViewAdapter()
+    FavoritesRecyclerViewAdapter()
     {
         super();
     }
@@ -26,7 +23,6 @@ class FavoritesRecyclerViewAdapter extends TranslatedTextRecyclerViewAdapter
         translatedTexts = TranslationFavorites.getInstance();
         translatedTexts.attachAdapter(this);
         notifyItemRangeInserted(getItemCount(), translatedTexts.size());
-
     }
 
     @Override

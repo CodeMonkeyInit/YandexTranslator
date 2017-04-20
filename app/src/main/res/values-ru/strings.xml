@@ -8,7 +8,6 @@
     <string name="connection_problem">Проблема с соеденением</string>
     <string name="history">История</string>
     <string name="detect_language">Определять язык</string>
-    <string name="clear_history">Очистить Историю</string>
     <string name="clear_history_confirmation">Очистить историю переводов?</string>
 
     <string-array name="translation_languages">
@@ -20,4 +19,8 @@
     <string name="yes">Да</string>
     <string name="no">" Нет"</string>
     <string name="add_to_favorites">Add to favorites</string>
+    <string name="change_language_button_description">change language</string>
+    <string name="remove_text_from_text_field_button_description">Очистить текст из текстового поля</string>
+    <string name="add_to_favorites_button_description">Добавить в избранное</string>
+    <string name="translated_with_yandex_translator_text">Переведено сервисом «Яндекс.Переводчик»</string>
 </resources>

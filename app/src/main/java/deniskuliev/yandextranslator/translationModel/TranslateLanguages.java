@@ -1,8 +1,5 @@
 package deniskuliev.yandextranslator.translationModel;
 
-/**
- * Created by deniskuliev on 22.03.17.
- */
 
 public class TranslateLanguages
 {
@@ -10,7 +7,9 @@ public class TranslateLanguages
 
     public final static int ENGLISH_LANGUAGE = 0;
     public final static int RUSSIAN_LANGUAGE = 1;
+    @SuppressWarnings("WeakerAccess")
     public final static int FRENCH_LANGUAGE = 2;
+    @SuppressWarnings("WeakerAccess")
     public final static int GERMAN_LANGUAGE = 3;
 
     private final static String ENGLISH = "en";
@@ -39,7 +38,7 @@ public class TranslateLanguages
         }
     }
 
-    public static int getLangugeCodeByString(String languageString)
+    public static int getLanguageCodeByString(String languageString)
     {
         switch (languageString)
         {

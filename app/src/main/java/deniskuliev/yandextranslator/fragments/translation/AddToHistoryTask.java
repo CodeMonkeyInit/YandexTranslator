@@ -7,12 +7,10 @@ import java.util.concurrent.ExecutionException;
 import deniskuliev.yandextranslator.translationModel.TranslatedText;
 import deniskuliev.yandextranslator.translationModel.TranslationHistory;
 
-/**
- * Created by deniskuliev on 02.04.17.
- */
 
 class AddToHistoryTask extends AsyncTask<TranslationTask, Void, TranslatedText>
 {
+    private static final int TRANSLATION_TASK = 0;
     private static TranslatedText lastTranslatedText;
 
     @Override
@@ -20,7 +18,10 @@ class AddToHistoryTask extends AsyncTask<TranslationTask, Void, TranslatedText>
     {
         try
         {
-            return translationTasks[0].get();
+            if (translationTasks[TRANSLATION_TASK] != null)
+            {
+                return translationTasks[TRANSLATION_TASK].get();
+            }
         }
         catch (InterruptedException | ExecutionException e)
         {
@@ -34,8 +35,10 @@ class AddToHistoryTask extends AsyncTask<TranslationTask, Void, TranslatedText>
     {
         TranslationHistory translationHistory = TranslationHistory.getInstance();
 
-        if (translatedText != null && !translatedText.original.isEmpty() && !translatedText
-                .fieldsEqual(lastTranslatedText))
+        if (translatedText != null
+                && !translatedText.original.isEmpty()
+                && translatedText.translated != null
+                && !translatedText.fieldsEqual(lastTranslatedText))
         {
             translationHistory.add(translatedText);
             lastTranslatedText = translatedText;

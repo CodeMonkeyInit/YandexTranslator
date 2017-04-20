@@ -8,13 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-/**
- * Created by deniskuliev on 28.03.17.
- */
-
 public abstract class HistoryAbstractFragment extends Fragment
 {
     protected TranslatedTextRecyclerViewAdapter _adapter;
+    @SuppressWarnings("WeakerAccess")
     protected RecyclerView.LayoutManager _layoutManager;
     protected ItemTouchHelper _touchHelper;
     protected RecyclerView _recyclerView;
@@ -31,10 +28,5 @@ public abstract class HistoryAbstractFragment extends Fragment
         _recyclerView.setLayoutManager(_layoutManager);
 
         _touchHelper.attachToRecyclerView(_recyclerView);
-    }
-
-    public TranslatedTextRecyclerViewAdapter getAdapter()
-    {
-        return _adapter;
     }
 }

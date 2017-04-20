@@ -5,16 +5,12 @@ import com.google.common.cache.CacheBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by deniskuliev on 22.03.17.
- */
-
-public class TranslatorCache
+class TranslatorCache
 {
     private final static int CACHE_SIZE = 10_000;
     private final static long CACHE_EXPIRATION_DAYS = 60;
     private static TranslatorCache instance;
-    private Cache<String, String> _translationsCache;
+    private final Cache<String, String> _translationsCache;
 
     private TranslatorCache()
     {
@@ -24,7 +20,7 @@ public class TranslatorCache
                 .build();
     }
 
-    public static TranslatorCache getInstance()
+    static TranslatorCache getInstance()
     {
         if (instance == null)
         {
@@ -34,12 +30,12 @@ public class TranslatorCache
         return instance;
     }
 
-    public String getIfPresent(String text, String translationLanguages)
+    String getIfPresent(String text, String translationLanguages)
     {
         return _translationsCache.getIfPresent(text + translationLanguages);
     }
 
-    public void add(String text, String translatedText, String translationLanguages)
+    void add(String text, String translatedText, String translationLanguages)
     {
         _translationsCache.put(text + translationLanguages, translatedText);
     }

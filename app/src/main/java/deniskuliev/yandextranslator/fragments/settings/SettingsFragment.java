@@ -13,10 +13,6 @@ import android.widget.Switch;
 
 import deniskuliev.yandextranslator.R;
 
-/**
- * Created by deniskuliev on 12.04.17.
- */
-
 public class SettingsFragment extends Fragment
 {
     public final static String SETTINGS_TAG = "app_settings";

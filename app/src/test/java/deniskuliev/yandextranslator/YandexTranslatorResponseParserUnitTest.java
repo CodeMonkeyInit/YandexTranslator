@@ -9,10 +9,6 @@ import deniskuliev.yandextranslator.yandexTranslatorApi.YandexTranslatorResponse
 
 import static junit.framework.Assert.assertEquals;
 
-/**
- * Created by deniskuliev on 25.03.17.
- */
-
 @RunWith(RobolectricTestRunner.class)
 public class YandexTranslatorResponseParserUnitTest
 {
@@ -29,12 +25,12 @@ public class YandexTranslatorResponseParserUnitTest
     }
 
     @Test
-    public void parseTranlationDetectionResponse_LanguageString()
+    public void parseTranslationDetectionResponse_LanguageString()
     {
         String apiResponse = "{    \"code\": 200,    \"lang\": \"en\"}";
         String expectedLanguageString = "en-ru";
 
-        TranslatedText translatedText = new TranslatedText("Привет мир!", null, "frbjbjbjh-ru");
+        TranslatedText translatedText = new TranslatedText("Привет мир!", null, "someLanguage-ru");
 
         YandexTranslatorResponseParser.parseLanguageDetectionResponse(apiResponse, translatedText);
 

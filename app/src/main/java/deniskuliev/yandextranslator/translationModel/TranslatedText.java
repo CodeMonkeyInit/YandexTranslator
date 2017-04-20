@@ -4,9 +4,6 @@ package deniskuliev.yandextranslator.translationModel;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-/**
- * Created by deniskuliev on 28.03.17.
- */
 @DatabaseTable(tableName = "History")
 public class TranslatedText
 {
@@ -20,14 +17,16 @@ public class TranslatedText
     public boolean isFavorite;
     @DatabaseField
     public boolean isInHistory;
+    @SuppressWarnings("unused")
     @DatabaseField(generatedId = true)
     protected int id;
 
-    public TranslatedText(String originalText, String translatedText, String tranlatedLanguages)
+    @SuppressWarnings("SameParameterValue")
+    public TranslatedText(String originalText, String translatedText, String translationLanguages)
     {
         this.original = originalText;
         this.translated = translatedText;
-        this.translationLanguages = tranlatedLanguages;
+        this.translationLanguages = translationLanguages;
     }
 
     public TranslatedText()
@@ -37,13 +36,9 @@ public class TranslatedText
     @Override
     public int hashCode()
     {
-        StringBuilder stringBuilder = new StringBuilder();
+        String hashCodeString = String.format("%s%s%s", original, translated, translationLanguages);
 
-        stringBuilder.append(original);
-        stringBuilder.append(translated);
-        stringBuilder.append(translationLanguages);
-
-        return stringBuilder.toString().hashCode();
+        return hashCodeString.hashCode();
     }
 
     @Override

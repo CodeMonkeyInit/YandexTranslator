@@ -26,15 +26,4 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/clear_history_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:background="?selectableItemBackground"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:clickable="true"
-        app:fabSize="auto"
-        app:srcCompat="@android:drawable/ic_menu_delete"/>
-
 </android.support.design.widget.CoordinatorLayout>

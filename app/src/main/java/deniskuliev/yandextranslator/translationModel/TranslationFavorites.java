@@ -6,9 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by deniskuliev on 30.03.17.
- */
 public class TranslationFavorites extends TranslationList
 {
     private static TranslationFavorites instance;
@@ -33,6 +30,7 @@ public class TranslationFavorites extends TranslationList
     {
         List<TranslatedText> translatedFavoritesTexts = null;
 
+        //noinspection Convert2Diamond
         translatedTexts = new ArrayList<TranslatedText>();
         reversedTranslatedTexts = Lists.reverse(translatedTexts);
 
@@ -49,7 +47,7 @@ public class TranslationFavorites extends TranslationList
         {
             for (TranslatedText translatedText : translatedFavoritesTexts)
             {
-                translatedTexts.add(translatedText);
+                super.add(translatedText);
             }
         }
 
@@ -116,5 +114,16 @@ public class TranslationFavorites extends TranslationList
         }
 
         super.remove(position);
+    }
+
+    @Override
+    public void empty()
+    {
+        for (TranslatedText translatedText : translatedTexts)
+        {
+            translatedText.isFavorite = false;
+        }
+
+        super.empty();
     }
 }

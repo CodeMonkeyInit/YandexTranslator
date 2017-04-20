@@ -6,9 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by deniskuliev on 30.03.17.
- */
 public class TranslationHistory extends TranslationList
 {
     private static TranslationHistory instance;
@@ -34,6 +31,7 @@ public class TranslationHistory extends TranslationList
     {
         List<TranslatedText> translatedHistoryTexts = null;
 
+        //noinspection Convert2Diamond
         translatedTexts = new ArrayList<TranslatedText>();
         reversedTranslatedTexts = Lists.reverse(translatedTexts);
 
@@ -50,7 +48,7 @@ public class TranslationHistory extends TranslationList
         {
             for (TranslatedText translatedText : translatedHistoryTexts)
             {
-                translatedTexts.add(translatedText);
+                super.add(translatedText);
             }
         }
 
@@ -78,6 +76,7 @@ public class TranslationHistory extends TranslationList
         super.add(translatedText);
     }
 
+    @Override
     public void empty()
     {
         for (TranslatedText translatedText : translatedTexts)
@@ -85,20 +84,7 @@ public class TranslationHistory extends TranslationList
             translatedText.isInHistory = false;
         }
 
-        try
-        {
-            historyDAO.empty(translatedTexts);
-            initializeCollections();
-
-            if (_adapter != null)
-            {
-                _adapter.notifyDataSetChanged();
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+        super.empty();
     }
 
     @Override
@@ -133,11 +119,5 @@ public class TranslationHistory extends TranslationList
             e.printStackTrace();
         }
     }
-
-    public HistoryDAO getHistoryDAO()
-    {
-        return historyDAO;
-    }
-
 }
 

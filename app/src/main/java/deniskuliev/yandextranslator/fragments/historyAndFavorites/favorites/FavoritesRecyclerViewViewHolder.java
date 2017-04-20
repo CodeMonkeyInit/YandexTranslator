@@ -5,14 +5,10 @@ import android.view.View;
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.AbstractHistoryRecyclerViewViewHolder;
 import deniskuliev.yandextranslator.translationModel.TranslationFavorites;
 
-/**
- * Created by deniskuliev on 30.03.17.
- */
-
 class FavoritesRecyclerViewViewHolder extends AbstractHistoryRecyclerViewViewHolder
 {
 
-    public FavoritesRecyclerViewViewHolder(View itemView)
+    FavoritesRecyclerViewViewHolder(View itemView)
     {
         super(itemView);
     }

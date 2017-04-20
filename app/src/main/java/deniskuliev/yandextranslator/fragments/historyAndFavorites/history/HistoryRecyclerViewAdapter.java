@@ -9,13 +9,9 @@ import deniskuliev.yandextranslator.fragments.historyAndFavorites.AbstractHistor
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
 import deniskuliev.yandextranslator.translationModel.TranslationHistory;
 
-/**
- * Created by deniskuliev on 29.03.17.
- */
-
 class HistoryRecyclerViewAdapter extends TranslatedTextRecyclerViewAdapter
 {
-    public HistoryRecyclerViewAdapter()
+    HistoryRecyclerViewAdapter()
     {
         super();
     }

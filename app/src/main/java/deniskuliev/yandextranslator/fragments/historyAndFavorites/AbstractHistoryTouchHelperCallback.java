@@ -3,19 +3,16 @@ package deniskuliev.yandextranslator.fragments.historyAndFavorites;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-/**
- * Created by deniskuliev on 29.03.17.
- */
-
 public abstract class AbstractHistoryTouchHelperCallback extends ItemTouchHelper.SimpleCallback
 {
-    protected final static int DRAG_DIRECTIONS = 0;
+    private final static int DRAG_DIRECTIONS = 0;
     protected TranslatedTextRecyclerViewAdapter _adapter;
 
 
-    public AbstractHistoryTouchHelperCallback(int dragDirections, int swipeDirections)
+    @SuppressWarnings("WeakerAccess")
+    public AbstractHistoryTouchHelperCallback(int swipeDirections)
     {
-        super(dragDirections, swipeDirections);
+        super(DRAG_DIRECTIONS, swipeDirections);
     }
 
     @Override

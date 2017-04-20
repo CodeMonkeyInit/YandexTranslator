@@ -8,16 +8,14 @@ import android.widget.TextView;
 import deniskuliev.yandextranslator.R;
 import deniskuliev.yandextranslator.translationModel.TranslatedText;
 
-/**
- * Created by deniskuliev on 29.03.17.
- */
-
+@SuppressWarnings("WeakerAccess")
 public abstract class AbstractHistoryRecyclerViewViewHolder extends RecyclerView.ViewHolder
 {
-    protected ImageButton _favoriteButton;
-    private TextView _originalText;
-    private TextView _translatedText;
+    protected final ImageButton _favoriteButton;
+    private final TextView _originalText;
+    private final TextView _translatedText;
 
+    @SuppressWarnings("WeakerAccess")
     public AbstractHistoryRecyclerViewViewHolder(View itemView)
     {
         super(itemView);

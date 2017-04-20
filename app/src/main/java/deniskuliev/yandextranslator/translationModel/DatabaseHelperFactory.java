@@ -4,10 +4,7 @@ import android.content.Context;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
-/**
- * Created by deniskuliev on 06.04.17.
- */
-
+@SuppressWarnings("WeakerAccess")
 public class DatabaseHelperFactory
 {
     private static DatabaseHelper _databaseHelper;
@@ -22,6 +19,7 @@ public class DatabaseHelperFactory
         _databaseHelper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
     }
 
+    @SuppressWarnings("unused")
     public static void releaseHelper()
     {
         OpenHelperManager.releaseHelper();

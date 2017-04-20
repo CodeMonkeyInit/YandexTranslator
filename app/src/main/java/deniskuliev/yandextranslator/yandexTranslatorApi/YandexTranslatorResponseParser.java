@@ -6,12 +6,12 @@ import org.json.JSONObject;
 
 import deniskuliev.yandextranslator.translationModel.TranslatedText;
 
-/**
- * Created by deniskuliev on 25.03.17.
- */
-
 public class YandexTranslatorResponseParser
 {
+    @SuppressWarnings("WeakerAccess")
+    public final static String REGEXP_REPLACE_ORIGINAL_LANGUAGE = "^.*?(?=-)";
+
+    @SuppressWarnings("UnusedReturnValue")
     public static boolean parseLanguageDetectionResponse(String apiJSONResponse, TranslatedText translatedText)
     {
         if (apiJSONResponse == null)
@@ -28,7 +28,7 @@ public class YandexTranslatorResponseParser
             language = translationJSONObject.getString("lang");
 
             translatedText.translationLanguages = translatedText.translationLanguages
-                    .replaceFirst("^.*?(?=-)", language);
+                    .replaceFirst(REGEXP_REPLACE_ORIGINAL_LANGUAGE, language);
 
             return true;
 
@@ -41,6 +41,7 @@ public class YandexTranslatorResponseParser
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static boolean parseTranslationResponse(String apiJSONResponse, TranslatedText translatedText)
     {
         translatedText.translated = "";

@@ -33,12 +33,14 @@ import deniskuliev.yandextranslator.translationModel.TranslationHistory;
 
 public class TranslationFragment extends Fragment
 {
+
+    @SuppressWarnings("WeakerAccess")
     public final static String PREFERENCES_TAG = "translation-fragment";
     private final static String ORIGINAL_LANGUAGE_TAG = "original-language";
     private final static String TRANSLATION_LANGUAGE_TAG = "translation-language";
-    public Spinner originalLanguage;
-    public Spinner translationLanguage;
     private volatile TranslationTask translationTask;
+    private Spinner originalLanguage;
+    private Spinner translationLanguage;
 
     private String getTranslationLanguages()
     {
@@ -59,11 +61,12 @@ public class TranslationFragment extends Fragment
 
         String translationLanguages = getTranslationLanguages();
 
+        //noinspection ConstantConditions
         EditText originalText = (EditText) view.findViewById(R.id.original_text);
 
         TextView translatedText = (TextView) view.findViewById(R.id.translated_text);
 
-        ImageButton translationFavoritesButton = (ImageButton) getView()
+        ImageButton translationFavoritesButton = (ImageButton) view
                 .findViewById(R.id.translation_favorite_button);
 
         boolean autoDetectLanguage = getActivity()
@@ -84,8 +87,9 @@ public class TranslationFragment extends Fragment
         translationTask.execute(originalText.getText().toString(), translationLanguages);
     }
 
-    void attachRemoveTextButtonHandler()
+    private void attachRemoveTextButtonHandler()
     {
+        //noinspection ConstantConditions
         ImageButton removeTextButton = (ImageButton) getView()
                 .findViewById(R.id.remove_text_button);
 
@@ -116,6 +120,7 @@ public class TranslationFragment extends Fragment
 
     private void restoreFavoritesButton()
     {
+        //noinspection ConstantConditions
         ImageButton favoritesButton = (ImageButton) getView()
                 .findViewById(R.id.translation_favorite_button);
 
@@ -127,6 +132,7 @@ public class TranslationFragment extends Fragment
 
     private void attachFavoritesButtonHandler()
     {
+        //noinspection ConstantConditions
         ImageButton favoritesButton = (ImageButton) getView()
                 .findViewById(R.id.translation_favorite_button);
 
@@ -199,15 +205,15 @@ public class TranslationFragment extends Fragment
         return spinnerSelection;
     }
 
-    public void saveSpinnerValuesToPreferences()
+    private void saveSpinnerValuesToPreferences()
     {
         SharedPreferences.Editor preferencesEditor = getActivity()
                 .getSharedPreferences(PREFERENCES_TAG, Context.MODE_PRIVATE).edit();
         int originalLanguageSelection = originalLanguage.getSelectedItemPosition();
-        int translatedLangugaeSelection = translationLanguage.getSelectedItemPosition();
+        int translatedLanguageSelection = translationLanguage.getSelectedItemPosition();
 
         preferencesEditor.putInt(ORIGINAL_LANGUAGE_TAG, originalLanguageSelection);
-        preferencesEditor.putInt(TRANSLATION_LANGUAGE_TAG, translatedLangugaeSelection);
+        preferencesEditor.putInt(TRANSLATION_LANGUAGE_TAG, translatedLanguageSelection);
 
         preferencesEditor.apply();
     }
@@ -241,6 +247,7 @@ public class TranslationFragment extends Fragment
 
     private void setOriginalEditTextParameters()
     {
+        //noinspection ConstantConditions
         EditText originalText = (EditText) getView().findViewById(R.id.original_text);
 
         originalText.setHorizontallyScrolling(false);
@@ -249,6 +256,7 @@ public class TranslationFragment extends Fragment
 
     private void attachTranslationHandler()
     {
+        //noinspection ConstantConditions
         final EditText originalText = (EditText) getView().findViewById(R.id.original_text);
 
         originalText.addTextChangedListener(
@@ -292,6 +300,7 @@ public class TranslationFragment extends Fragment
 
     private void restoreTranslatedText()
     {
+        //noinspection ConstantConditions
         TextView translatedTextView = (TextView) getView().findViewById(R.id.translated_text);
         String translatedText;
 
@@ -304,16 +313,18 @@ public class TranslationFragment extends Fragment
 
     private void attachTranslatedWithYandexTextHandler()
     {
+        //noinspection ConstantConditions
         TextView translatedWithYandexTextView = (TextView) getView()
-                .findViewById(R.id.translated_with_yanex_text);
+                .findViewById(R.id.translated_with_yandex_text);
 
         translatedWithYandexTextView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Intent openYandexTranslatorURL = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                        "http://translate.yandex.ru/"));
+                Intent openYandexTranslatorURL = new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("http://translate.yandex.ru/"));
 
                 startActivity(openYandexTranslatorURL);
             }
@@ -332,6 +343,7 @@ public class TranslationFragment extends Fragment
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {
+        //noinspection ConstantConditions
         LinearLayout translationTextFields = (LinearLayout) getView()
                 .findViewById(R.id.translation_text_fields);
 
@@ -352,11 +364,11 @@ public class TranslationFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         ImageButton swapLanguageButton = (ImageButton) view
-                .findViewById(R.id.swap_translation_languages);
+                .findViewById(R.id.swap_translation_languages_button);
 
 
-        originalLanguage = (Spinner) view.findViewById(R.id.original_text_language);
-        translationLanguage = (Spinner) view.findViewById(R.id.translated_text_language);
+        originalLanguage = (Spinner) view.findViewById(R.id.original_text_language_spinner);
+        translationLanguage = (Spinner) view.findViewById(R.id.translated_text_language_spinner);
 
         swapLanguageButton.setOnClickListener(new View.OnClickListener()
         {
@@ -382,9 +394,7 @@ public class TranslationFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_translation, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_translation, container, false);
     }
 
     @Override
@@ -396,10 +406,10 @@ public class TranslationFragment extends Fragment
 
     private class OnLanguageSelectedListener implements AdapterView.OnItemSelectedListener
     {
+        private final Spinner _oppositeSpinner;
         private int previousSelectedLanguage;
-        private Spinner _oppositeSpinner;
 
-        public OnLanguageSelectedListener(Spinner oppositeSpinner)
+        OnLanguageSelectedListener(Spinner oppositeSpinner)
         {
             _oppositeSpinner = oppositeSpinner;
         }
@@ -418,7 +428,6 @@ public class TranslationFragment extends Fragment
                 previousSelectedLanguage = position;
             }
 
-            //TODO rewrite this "brilliant" solution
             if (getActivity().getCurrentFocus() != null)
             {
                 translateInBackground();

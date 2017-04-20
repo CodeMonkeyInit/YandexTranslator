@@ -2,34 +2,39 @@ package deniskuliev.yandextranslator.fragments.translation;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import deniskuliev.yandextranslator.R;
+import deniskuliev.yandextranslator.TranslatorAppMainActivity;
 import deniskuliev.yandextranslator.translationModel.TranslateLanguages;
 import deniskuliev.yandextranslator.translationModel.TranslatedText;
-import deniskuliev.yandextranslator.yandexTranslatorApi.YandexTranslator;
+import deniskuliev.yandextranslator.yandexTranslatorApi.TranslatorApi;
 import deniskuliev.yandextranslator.yandexTranslatorApi.YandexTranslatorResponseParser;
 
-/**
- * Created by deniskuliev on 02.04.17.
- */
-
-class TranslationTask extends AsyncTask<String, Void, TranslatedText>
+@SuppressWarnings("WeakerAccess")
+public class TranslationTask extends AsyncTask<String, Void, TranslatedText>
 {
-    final static String EMPTY_STRING = "";
+    private final static String EMPTY_STRING = "";
 
-    final static int ORIGINAL_TEXT = 0;
-    final static int TRANSLATION_LANGUAGES = 1;
+    private final static int ORIGINAL_TEXT = 0;
+    private final static int TRANSLATION_LANGUAGES = 1;
+
+    private final Activity _activity;
+    private final TextView _translatedTextField;
+    private final Spinner _originalLanguageSpinner;
+    private final ImageButton _favoritesButton;
+    private final boolean _autoDetectionEnabled;
+
     public TranslatedText translatedText;
-    private Activity _activity;
-    private TextView _translatedTextField;
-    private Spinner _originalLanguageSpinner;
-    private ImageButton _favoritesButton;
-    private boolean _autoDetectionEnabled;
+
+    @SuppressWarnings("WeakerAccess")
+    @Inject
+    protected TranslatorApi translator;
 
     public TranslationTask(Activity activity,
                            TextView translatedTextField,
@@ -42,13 +47,14 @@ class TranslationTask extends AsyncTask<String, Void, TranslatedText>
         _originalLanguageSpinner = originalLanguageSpinner;
         _autoDetectionEnabled = autoDetectLanguage;
         _favoritesButton = favoritesButton;
+
+        ((TranslatorAppMainActivity) activity).getActivityComponent().injectInto(this);
     }
 
     @Override
     protected TranslatedText doInBackground(String... text)
     {
-        String response = null;
-        YandexTranslator translator = new YandexTranslator();
+        String response;
         TranslatedText translatedText = new TranslatedText();
 
         translatedText.original = text[ORIGINAL_TEXT].trim();
@@ -65,9 +71,12 @@ class TranslationTask extends AsyncTask<String, Void, TranslatedText>
         {
             if (_autoDetectionEnabled)
             {
+                String serverLanguageDetectionJSONResponse = translator
+                        .getOriginalLanguage(translatedText.original,
+                                             translatedText.getOriginalLanguage());
+
                 YandexTranslatorResponseParser.parseLanguageDetectionResponse(
-                        translator.getOriginalLanguage(translatedText.original,
-                                                       translatedText.getOriginalLanguage()),
+                        serverLanguageDetectionJSONResponse,
                         translatedText);
             }
 
@@ -101,20 +110,18 @@ class TranslationTask extends AsyncTask<String, Void, TranslatedText>
 
         if (_autoDetectionEnabled)
         {
-            String originalLangugage = backgroundTranslatedText.getOriginalLanguage();
+            String originalLanguage = backgroundTranslatedText.getOriginalLanguage();
 
-            int originalLangugageCode = TranslateLanguages
-                    .getLangugeCodeByString(originalLangugage);
+            int originalLanguageCode = TranslateLanguages
+                    .getLanguageCodeByString(originalLanguage);
 
-            if (originalLangugageCode != TranslateLanguages.UNKNOWN_LANGUAGE)
+            if (originalLanguageCode != TranslateLanguages.UNKNOWN_LANGUAGE)
             {
-                _originalLanguageSpinner.setSelection(originalLangugageCode);
+                _originalLanguageSpinner.setSelection(originalLanguageCode);
             }
         }
 
         _favoritesButton.setImageResource(R.drawable.ic_favorites_history);
-
-        Log.d("FavoritesButton", "unset by TranslationTask.onPostExecute()");
 
         translatedText = backgroundTranslatedText;
 

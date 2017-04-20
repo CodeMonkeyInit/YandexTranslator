@@ -14,9 +14,12 @@
     </string-array>
     <string name="history">History</string>
     <string name="detect_language">Detect Language</string>
-    <string name="clear_history">Clear History</string>
     <string name="clear_history_confirmation">Clear translation history?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="add_to_favorites">Add to favorites</string>
+    <string name="change_language_button_description">change language</string>
+    <string name="remove_text_from_text_field_button_description">Remove text from text field</string>
+    <string name="add_to_favorites_button_description">Add to favorites button</string>
+    <string name="translated_with_yandex_translator_text">Powered by Yandex.Translate</string>
 </resources>

@@ -11,15 +11,12 @@ import android.view.ViewGroup;
 import deniskuliev.yandextranslator.R;
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.HistoryAbstractFragment;
 
-/**
- * Created by deniskuliev on 30.03.17.
- */
-
 public class FavoritesFragment extends HistoryAbstractFragment
 {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
+        //noinspection ConstantConditions
         _recyclerView = (RecyclerView) getView().findViewById(R.id.favorites_recycler_view);
 
         super.onViewCreated(view, savedInstanceState);

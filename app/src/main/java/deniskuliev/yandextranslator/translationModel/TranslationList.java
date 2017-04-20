@@ -5,28 +5,27 @@ import java.util.List;
 
 import deniskuliev.yandextranslator.fragments.historyAndFavorites.TranslatedTextRecyclerViewAdapter;
 
-/**
- * Created by deniskuliev on 30.03.17.
- */
-
 public abstract class TranslationList
 {
-    protected TranslatedTextRecyclerViewAdapter _adapter;
-
-    protected List<TranslatedText> translatedTexts;
-    protected List<TranslatedText> reversedTranslatedTexts;
-
+    @SuppressWarnings("WeakerAccess")
     protected HistoryDAO historyDAO;
 
+    @SuppressWarnings("WeakerAccess")
+    protected TranslatedTextRecyclerViewAdapter _adapter;
+
+    @SuppressWarnings("WeakerAccess")
+    protected List<TranslatedText> translatedTexts;
+    @SuppressWarnings("WeakerAccess")
+    protected List<TranslatedText> reversedTranslatedTexts;
+
+    @SuppressWarnings("WeakerAccess")
     public TranslationList()
     {
         initializeDataAccessObject();
         initializeCollections();
     }
 
-    protected abstract void initializeCollections();
-
-    protected void initializeDataAccessObject()
+    private void initializeDataAccessObject()
     {
         try
         {
@@ -37,6 +36,8 @@ public abstract class TranslationList
             e.printStackTrace();
         }
     }
+
+    protected abstract void initializeCollections();
 
     public int size()
     {
@@ -53,6 +54,7 @@ public abstract class TranslationList
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void set(int position, TranslatedText translatedText)
     {
         reversedTranslatedTexts.set(position, translatedText);
@@ -63,6 +65,7 @@ public abstract class TranslationList
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean contains(TranslatedText translatedText)
     {
         return reversedTranslatedTexts.contains(translatedText);
@@ -88,11 +91,31 @@ public abstract class TranslationList
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
+    public void empty()
+    {
+        try
+        {
+            historyDAO.empty(translatedTexts);
+            initializeCollections();
+
+            if (_adapter != null)
+            {
+                _adapter.notifyDataSetChanged();
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void attachAdapter(TranslatedTextRecyclerViewAdapter adapter)
     {
         _adapter = adapter;
     }
 
+    @SuppressWarnings("unused")
     public void detachAdapter()
     {
         _adapter = null;
