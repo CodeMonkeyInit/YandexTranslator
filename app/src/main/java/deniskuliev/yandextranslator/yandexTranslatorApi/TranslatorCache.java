@@ -3,21 +3,14 @@ package deniskuliev.yandextranslator.yandexTranslatorApi;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
-import org.json.JSONObject;
-
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by deniskuliev on 22.03.17.
- */
-
-public class TranslatorCache
+class TranslatorCache
 {
     private final static int CACHE_SIZE = 10_000;
     private final static long CACHE_EXPIRATION_DAYS = 60;
-
-    private Cache<String, String> _translationsCache;
     private static TranslatorCache instance;
+    private final Cache<String, String> _translationsCache;
 
     private TranslatorCache()
     {
@@ -27,17 +20,7 @@ public class TranslatorCache
                 .build();
     }
 
-    public String getIfPresent(String text)
-    {
-         return _translationsCache.getIfPresent(text);
-    }
-
-    public void add(String text, String translatedText)
-    {
-        _translationsCache.put(text, translatedText);
-    }
-
-    public static TranslatorCache getInstance()
+    static TranslatorCache getInstance()
     {
         if (instance == null)
         {
@@ -45,5 +28,15 @@ public class TranslatorCache
         }
 
         return instance;
+    }
+
+    String getIfPresent(String text, String translationLanguages)
+    {
+        return _translationsCache.getIfPresent(text + translationLanguages);
+    }
+
+    void add(String text, String translatedText, String translationLanguages)
+    {
+        _translationsCache.put(text + translationLanguages, translatedText);
     }
 }

@@ -1,33 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragments.HistoryFragment">
+             android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/history_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/clear_history_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:clickable="true"
+        app:borderWidth="0dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_clear_history"
+        tools:ignore="UnusedAttribute"/>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/translated_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Lorem ipsum dolor sit amet! Victor Kulitsky Petyx"
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+</FrameLayout>

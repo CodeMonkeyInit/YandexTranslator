@@ -6,7 +6,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="deniskuliev.yandextranslator.TranslatorMain">
+              tools:context="deniskuliev.yandextranslator.TranslatorAppMainActivity">
 
     <FrameLayout
         android:id="@+id/translator_container"
@@ -21,5 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/bottom_navigation_bar_color_selector"
+        app:itemTextColor="@color/bottom_navigation_bar_color_selector"
         app:menu="@menu/navigation"/>
 </LinearLayout>

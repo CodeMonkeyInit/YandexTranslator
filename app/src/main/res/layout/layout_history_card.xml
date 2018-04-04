@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/translation_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/history_original_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingBottom="15dp"
+            android:paddingEnd="25dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="25dp"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:text="Lorem ipsum dolor sit consectetur adipisicing elit. Voluptate voluptatum, labore blanditiis enim harum fugiat!"/>
+
+        <TextView
+            android:id="@+id/history_translated_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="15dp"
+            android:paddingEnd="25dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="25dp"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:textSize="16sp"
+            tools:text="Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Рыбного большого путь пунктуация толку."/>
+
+        <ImageButton
+            android:id="@+id/history_favorite_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/add_to_favorites"
+            cardview:srcCompat="@drawable/ic_favorites_history"/>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

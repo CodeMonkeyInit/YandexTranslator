@@ -10,38 +10,134 @@
     android:clipToPadding="true"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="deniskuliev.yandextranslator.fragments.TranslationFragment">
+    tools:context="deniskuliev.yandextranslator.fragments.translation.TranslationFragment">
 
-    <EditText
-        android:id="@+id/original_text"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="0.13"
-        android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:gravity="start"
-        android:hint="@string/input_text"
-        android:inputType="textAutoCorrect|text"
-        android:textAlignment="viewStart"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context="deniskuliev.yandextranslator.TranslatorMain"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/translated_text"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/original_text_language_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="4"
+                />
+
+            <ImageButton
+                android:id="@+id/swap_translation_languages_button"
+                style="@style/Widget.AppCompat.ImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/change_language_button_description"
+                app:srcCompat="@drawable/ic_change_language"/>
+
+            <Spinner
+                android:id="@+id/translated_text_language_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="4"/>
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/translation_text_fields"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="10dp"
-        android:layout_weight="0.43"
-        android:clickable="false"
-        android:ems="10"
-        android:gravity="start"
-        android:padding="10dp"
-        android:textIsSelectable="true"
-        android:textSize="18sp"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            tools:ignore="NestedWeights">
+
+            <EditText
+                android:id="@+id/original_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:drawable/editbox_background"
+                android:ems="10"
+                android:gravity="start"
+                android:hint="@string/input_text"
+                android:inputType="textAutoCorrect|text"
+                android:paddingBottom="30dp"
+                android:textAlignment="viewStart"/>
+
+            <ImageButton
+                android:id="@+id/remove_text_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/original_text"
+                android:layout_alignEnd="@id/original_text"
+                android:layout_alignRight="@id/original_text"
+                android:background="@null"
+                android:contentDescription="@string/remove_text_from_text_field_button_description"
+                android:padding="5dp"
+                android:src="@drawable/remove_text_button_selector"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/translated_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:clickable="false"
+                android:ems="10"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textIsSelectable="true"
+                android:textSize="18sp"/>
+
+            <ImageButton
+                android:id="@+id/translation_favorite_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/translated_text"
+                android:layout_alignEnd="@id/translated_text"
+                android:layout_alignRight="@id/translated_text"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/add_to_favorites_button_description"
+                android:padding="5dp"
+                android:src="@drawable/ic_favorites_history"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3">
+
+        <TextView
+            android:id="@+id/translated_with_yandex_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/translated_with_yandex_translator_text"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>
